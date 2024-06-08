@@ -1,5 +1,11 @@
 vim.opt.guicursor = ""
 
+
+vim.opt.guifont = {
+  "CascadiaCode,Vazir Code Hack,MesloLGS NF,Hack Nerd Font",
+  ":h15",
+}
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -10,6 +16,8 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+vim.opt.termbidi = true
+
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
@@ -17,7 +25,9 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true

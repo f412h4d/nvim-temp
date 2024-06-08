@@ -1,7 +1,6 @@
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
-
 lsp.ensure_installed({
   'tsserver',
   'rust_analyzer',
@@ -9,8 +8,6 @@ lsp.ensure_installed({
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
-
-
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -51,6 +48,18 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
+
+-- closes the quick fix after pressing e
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+        local bufnr = vim.fn.bufnr('%')
+        vim.keymap.set("n", "e", function()
+            vim.api.nvim_command([[execute "normal! \<cr>"]])
+            vim.api.nvim_command(bufnr .. 'bd')
+        end, { buffer = bufnr })
+    end,
+    pattern = "qf",
+})
 
 lsp.setup()
 
